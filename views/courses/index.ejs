@@ -1,0 +1,19 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <header class="jumbotron">
+        <div class="container">
+            <h1> Welcome to Online Courses </h1>
+            <% if(current_user) { %>
+                <p>Hello <%= current_user.username %> </p>
+            <% } %>   
+        </div>
+    </header>
+
+
+
+</div>
+
+
+<% include ../partials/footer %>
+

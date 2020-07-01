@@ -9,10 +9,10 @@ router.get("/", function(req, res){
 });
 
 
-
 router.get("/register", function(req, res){
     res.render("register.ejs");
 });
+
 
 router.post("/register", function(req, res){
     User.register(new User({username: req.body.username}), req.body.password, function(error, user){
@@ -34,11 +34,10 @@ router.get("/login", function(req, res){
 });
 
 
-// Middleware -> executes before the callback
 router.post("/login", passport.authenticate("local", {
         successRedirect: "/courses",
         failureRedirect: "/login"
-    }), function(req, res){ 
+    }), function(req, res){
     }
 );
 
@@ -48,7 +47,6 @@ router.get("/logout", function(req, res){
     req.flash("success", "Signed out successfuly.");
     res.redirect("/courses");
 });
-
 
 
 module.exports = router;

@@ -1,0 +1,18 @@
+<% include ../partials/header %>
+
+<h1>Create new course</h1>
+
+<div class="container">
+    <div style="width: 30%; margin: 0 auto;">
+        <form action="/courses" method="POST">
+            <div class="form-group">
+                <label> Course name </label>
+                <input class="form-control" type="text" placeholder="Name" name="name">
+            </div>
+            <button class="btn btn-md btn-primary btn-block"> Submit! </button>
+        </form>
+        <a href="/courses">Go back</a>
+    </div>
+</div>
+
+<% include ../partials/footer %>

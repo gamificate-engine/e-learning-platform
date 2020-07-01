@@ -18,7 +18,8 @@ var course_routes = require("./routes/courses");
 
 mongoose.connect(process.env.DATABASE_URL, { 
     useNewUrlParser: true,
-    useCreateIndex: true
+    useCreateIndex: true,
+    useUnifiedTopology: true
 }).then(() => {
     console.log("Connected to DB (" + process.env.DATABASE_URL +")");
 }).catch(error => {

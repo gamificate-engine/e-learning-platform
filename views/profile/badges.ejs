@@ -1,0 +1,49 @@
+<% include ../partials/header %>
+
+<h1>Profile</h1>
+
+<div class="container">
+    <div class="row" style="margin: 0 auto;">
+            <% finished_badges.forEach(badge => { %>
+                <div class="col-md-3">
+                    <div class="card mt-3">
+                        <div class="card-body">
+                            <h5 class="card-title"> <%= badge.name %></h5>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col">
+                                    <div class="progress progress-sm">
+                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><span class="sr-only">Completed</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <% }) %>
+    </div>
+    <div class="row" style="margin: 0 auto;">
+        UNFINISHED:
+        <% unfinished_badges.forEach(badge => { %>
+            <div class="col-md-3">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title"> <%= badge.name %></h5>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col">
+                                <div class="progress progress-sm">
+                                    <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: <%= badge.progress*100/badge.required %>%;">
+                                        <%= badge.progress %>/<%= badge.required %>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <% }) %>
+    </div>
+</div>
+
+<% include ../partials/footer %>

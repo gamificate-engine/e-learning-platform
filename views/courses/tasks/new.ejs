@@ -1,0 +1,22 @@
+<% include ../../partials/header %>
+
+<h1>Create new task for course <%= course.name %></h1>
+
+<div class="container">
+    <div style="width: 30%; margin: 0 auto;">
+        <form action="/courses/<%= course.id %>/tasks" method="POST">
+            <div class="form-group">
+                <label> Name </label>
+                <input class="form-control" type="text" placeholder="Name" name="name">
+            </div>
+            <div class="form-group">
+                <label> Description </label>
+                <input class="form-control" type="text" placeholder="Description" name="description">
+            </div>
+            <button class="btn btn-md btn-primary btn-block"> Submit! </button>
+        </form>
+        <a href="/courses/<%= course.id %>">Go back</a>
+    </div>
+</div>
+
+<% include ../../partials/footer %>

@@ -7,7 +7,42 @@
         </div>
     </header>
 
+    <% if (current_user.id == course.owner.id) { %>
+        <div class="row float-right">
+            <a href="/courses/<%= course.id %>/tasks" class="btn btn-primary float-right">Add task</a>
+        </div>
+    <% } else if (course.students.findIndex(el => el._id == current_user.id) == -1) { %>
+        <div class="row float-right">
+            <form action="/courses/<%= course.id %>" method="POST">
+                <button class="btn btn-primary float-right">Enroll course</button>
+            </form>
+        </div>
+    <% } else { %>
+        <div class="row float-right">
+            <button class="btn btn-primary float-right" disabled>Enrolled</button>
+        </div>
+    <% } %>
 
+    <div class="row">
+        <div class="col-6">
+            <h3>Tasks</h3>
+            <ul>
+                <% course.tasks.forEach( task => { %>
+                    <li><%= task.name %></li>
+                <% }) %>
+            </ul>
+        </div>
+        <div class="col-6">
+            <h3>Students</h3>
+            <ul>
+                <% course.students.forEach( student => { %>
+                    <li><%= student.username %></li>
+                <% }) %>
+            </ul>
+
+        </div>
+
+    </div>
 
 </div>
 

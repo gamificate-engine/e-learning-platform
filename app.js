@@ -12,7 +12,10 @@ var flash = require("connect-flash");
 var methodOverride = require("method-override"); // override HTTP (PUT and DELETE)
 var auth_routes = require("./routes/index");
 var course_routes = require("./routes/courses");
+var profile_routes = require("./routes/profile")
+var gamificate = require("gamificate-js");
 
+gamificate.create(process.env.GAMIFICATE_ID_REALM, process.env.GAMIFICATE_API_KEY)
 
 /*********** DATABASE CONFIG ***********/
 
@@ -79,9 +82,9 @@ app.use(function(req, res, next){
 // Import routes
 app.use(auth_routes);
 app.use(course_routes);
-
+app.use(profile_routes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Server is running! (Port " +  process.env.PORT + ")"); 
 });
- 
+

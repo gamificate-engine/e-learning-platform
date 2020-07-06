@@ -3,7 +3,8 @@
 <div class="container">
     <header class="jumbotron">
         <div class="container">
-            <h1> <%= course.id %> </h1>
+            <h1> <%= course.name %> </h1>
+            <p> Course created by <%= course.owner.username %></p>
         </div>
     </header>
 
@@ -26,20 +27,57 @@
     <div class="row">
         <div class="col-6">
             <h3>Tasks</h3>
-            <ul>
-                <% course.tasks.forEach( task => { %>
-                    <li><%= task.name %></li>
-                <% }) %>
-            </ul>
+
+            <div class="container profile-page">
+                <div class="row">
+                    <div class="col-12">
+                        <% course.tasks.forEach( task => { %>
+                            <div class="card profile-header">
+                                <div class="body">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-12">
+                                            <div class="profile-image float-md-right"> <img src="https://img.icons8.com/plasticine/2x/task.png" alt=""> </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-12">
+                                            <h4 class="m-t-0 m-b-0"><%= task.name %></h4>
+                                            <span class="job_post">U<%= task.description %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-6">
             <h3>Students</h3>
-            <ul>
-                <% course.students.forEach( student => { %>
-                    <li><%= student.username %></li>
-                <% }) %>
-            </ul>
-
+            <div class="container profile-page">
+                <div class="row">
+                    <div class="col-12">
+                        <% course.students.forEach( student => { %>
+                            <div class="card profile-header">
+                                <div class="body">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-4 col-12">
+                                            <div class="profile-image float-md-right"> <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt=""> </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-8 col-12">
+                                            <h4 class="m-t-0 m-b-0"><%= student.username %></h4>
+                                            <span class="job_post">Ui UX Designer</span>
+                                            <p class="social-icon m-t-5 m-b-0">
+                                                <a title="Twitter" href="javascript:void(0);"><i class="fa fa-twitter"></i></a>
+                                                <a title="Facebook" href="javascript:void(0);"><i class="fa fa-facebook"></i></a>
+                                                <a title="Instagram" href="javascript:void(0);"><i class="fa fa-instagram "></i></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

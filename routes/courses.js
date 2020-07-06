@@ -3,7 +3,7 @@ var router = express.Router();
 var Course = require("../models/course");
 var Task = require("../models/task");
 var middleware = require("../middleware"); // auto imports index.js 
-var gamificate = require("gamificate-js")
+
 
 // INDEX - List of all courses
 router.get("/courses", middleware.isLoggedIn, (req, res) => {
@@ -41,12 +41,13 @@ router.post("/courses/:id", middleware.isLoggedIn, (req, res) => {
     const id_course = req.params.id;
 
     Course.findById(id_course, (error, course) => {
-        if(error || !course) {
+        if (error || !course) {
             console.log("Error finding object on DB.");
             req.flash("error", "Course not found");
             res.redirect("/courses");
         }
-        else{
+        else {
+            console.log(gamificate.test())
             gamificate.updateUserBadgeProgress(req.user.gamificate_id, 16, 1) //.then(r => console.log(r))
             gamificate.updateUserBadgeProgress(req.user.gamificate_id, 18, 1)
             gamificate.updateUserBadgeProgress(req.user.gamificate_id, 19, 1)
@@ -91,7 +92,7 @@ router.post("/courses/:id/tasks", middleware.isTeacherLoggedIn, (req, res) => {
                     course.tasks.push(task);
                     course.save();
                     req.flash("success", "Task added successfully.");
-                    res.redirect("/courses/" + course._id);
+                    gamificate_teachers.updateUserBadgeProgress(req.user.gamificate_id, 20, 1).then(r => res.redirect("/courses/" + course._id))
                 }
             })
         }

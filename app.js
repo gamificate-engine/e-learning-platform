@@ -7,18 +7,21 @@ var mongoose = require("mongoose");
 var session = require("express-session");
 var passport = require("passport");
 var LocalStategy = require("passport-local");
-var passportLocalMongoose = require("passport-local-mongoose");
 var flash = require("connect-flash");
 var methodOverride = require("method-override"); // override HTTP (PUT and DELETE)
 var auth_routes = require("./routes/index");
 var course_routes = require("./routes/courses");
 var profile_routes = require("./routes/profile")
-var gamificate = require("gamificate-js");
 
-gamificate.create(process.env.GAMIFICATE_ID_REALM, process.env.GAMIFICATE_API_KEY)
+
+/*********** GAMIFICATE CONFIG ***********/
+var Gamificate = require("gamificate-js");
+
+gamificate = new Gamificate(process.env.GAMIFICATE_ID_REALM_STUDENTS, process.env.GAMIFICATE_API_KEY_STUDENTS)
+gamificate_teachers = new Gamificate(process.env.GAMIFICATE_ID_REALM_TEACHERS, process.env.GAMIFICATE_API_KEY_TEACHERS)
+
 
 /*********** DATABASE CONFIG ***********/
-
 mongoose.connect(process.env.DATABASE_URL, { 
     useNewUrlParser: true,
     useCreateIndex: true,

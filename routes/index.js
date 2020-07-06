@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var User = require("../models/user");
-var gamificate = require('gamificate-js')
+
 
 router.get("/", function(req, res){
     res.render("landing.ejs");
@@ -24,16 +24,32 @@ router.post("/register", function(req, res){
             return res.render("register.ejs", {error: error.message});            
         }
 
-        gamificate.registerUser(username, email).then( response => {
-            const gamificate_user_id = response.id
-            user.gamificate_id = gamificate_user_id
-            user.save();
+        if(req.body.isTeacher !== 'on') {
+            gamificate.registerUser(username, email).then( response => {
+                const gamificate_user_id = response.id
+                user.gamificate_id = gamificate_user_id
+                user.save();
 
-            passport.authenticate("local")(req, res, function(){
-                req.flash("success", "Welcome to Online Courses " + user.username);
-                res.redirect("/courses");
-            });
-        })
+                passport.authenticate("local")(req, res, function(){
+                    req.flash("success", "Welcome to Online Courses " + user.username);
+                    res.redirect("/courses");
+                });
+            })
+        }
+        else {
+            gamificate_teachers.registerUser(username, email).then( response => {
+                const gamificate_user_id = response.id
+                user.gamificate_id = gamificate_user_id
+                user.isTeacher = true
+                user.save();
+
+                passport.authenticate("local")(req, res, function(){
+                    req.flash("success", "Welcome to Online Courses " + user.username);
+                    res.redirect("/courses");
+                });
+            })
+        }
+
     });
 });
 
@@ -54,7 +70,7 @@ router.post("/login", passport.authenticate("local", {
 router.get("/logout", function(req, res){
     req.logout();
     req.flash("success", "Signed out successfuly.");
-    res.redirect("/courses");
+    res.redirect("/");
 });
 
 
